@@ -26,7 +26,7 @@ const NavbarSection = () => {
         Browse Tasks
       </NavLink>
 
-      <NavLink href="/browse-freelancer">
+      <NavLink href="/browse-freelancers">
         <TbUser />
         Browse Freelancers
       </NavLink>
