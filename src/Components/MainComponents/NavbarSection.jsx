@@ -2,19 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
-
-// import { authClient } from "@/lib/auth-client";
-
 import { Button, Drawer, Separator, Spinner } from "@heroui/react";
 import ToogleTheme from "./ToogleTheme";
 import { IoHome, IoMenu } from "react-icons/io5";
-
 import { TbBrowser, TbUser } from "react-icons/tb";
 import NavLink from "./NavLink";
+import { authClient } from "@/lib/auth-client";
+import { FiLogOut } from "react-icons/fi";
 
 const NavbarSection = () => {
-  //   const { data, isPending } = authClient.useSession();
-
+  const { data, isPending } = authClient.useSession();
   const links = (
     <>
       <NavLink href="/">
@@ -35,7 +32,6 @@ const NavbarSection = () => {
   return (
     <div className="border-b py-4">
       <div className="w-11/12 mx-auto max-sm:flex-wrap max-sm:justify-center flex items-center justify-between">
-        {/* Left Side */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 ">
             <aside className="lg:hidden">
@@ -65,12 +61,10 @@ const NavbarSection = () => {
           <div className="items-center gap-4 hidden lg:flex">{links}</div>
         </div>
 
-        {/* Right Side */}
         <div className="flex items-center gap-2">
-          {/* Theme Switch */}
           <ToogleTheme></ToogleTheme>
 
-          {/* {isPending ? (
+          {isPending ? (
             <div className="flex items-center gap-4">
               <Spinner />
             </div>
@@ -110,11 +104,11 @@ const NavbarSection = () => {
                 Logout
               </Button>
             </div>
-          ) : ( */}
-          <Link href="/login">
-            <Button>Login</Button>
-          </Link>
-          {/* )} */}
+          ) : (
+            <Link href="/login">
+              <Button>Login</Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

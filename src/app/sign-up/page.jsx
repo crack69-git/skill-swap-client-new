@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Description,
@@ -10,12 +11,27 @@ import {
   RadioGroup,
   TextField,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
 const page = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formValue = Object.fromEntries(formData.entries());
     console.log("Form submitted with data:", formValue);
+    const { data, error } = await authClient.signUp.email({
+      name: formValue.name, // required
+      email: formValue.email, // required
+      password: formValue.password, // required
+      image: formValue.imageLink,
+      callbackURL: "/login",
+    });
+    if (data) {
+      alert("Sign up successful! ");
+      redirect("/login");
+    }
+    if (error) {
+      alert("Error signing up");
+    }
   };
   return (
     <div>

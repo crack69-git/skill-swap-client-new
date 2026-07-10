@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -8,6 +9,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 const Page = () => {
   const onSubmit = async (e) => {
@@ -15,6 +17,18 @@ const Page = () => {
     const formData = new FormData(e.currentTarget);
     const formValue = Object.fromEntries(formData.entries());
     console.log("Form submitted with data:", formValue);
+    const { data, error } = await authClient.signIn.email({
+      email: formValue.email, // required
+      password: formValue.password, // required
+      rememberMe: true,
+    });
+    if (data) {
+      alert("Login successful! ");
+      redirect("/");
+    }
+    if (error) {
+      alert("Error logging in");
+    }
   };
   const handleGoogle = () => {
     // Implement Google sign-in logic here
