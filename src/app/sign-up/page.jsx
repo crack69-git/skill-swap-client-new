@@ -25,6 +25,7 @@ const page = () => {
       email: formValue.email, // required
       password: formValue.password, // required
       image: formValue.imageLink,
+      role: formValue.role, // required
       callbackURL: "/login",
     });
     if (data) {
