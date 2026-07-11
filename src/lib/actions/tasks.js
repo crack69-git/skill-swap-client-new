@@ -20,3 +20,34 @@ export const getTaskById = async (id) => {
   );
   return response.json();
 };
+
+export const getAllTasks = async () => {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/task/alltasks`, {
+    method: "GET",
+  });
+  return response.json();
+};
+
+export const patchTaskById = async (id, updatedData) => {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/task/patch/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    },
+  );
+  return response.json();
+};
+
+export const ddeleteTaskById = async (id) => {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/task/delete/${id}`,
+    {
+      method: "DELETE",
+    },
+  );
+  return response.json();
+};
