@@ -3,9 +3,9 @@ import React from "react";
 
 const layout = ({ children }) => {
   return (
-    <div className="flex  min-h-screen ">
+    <div className="flex ">
       <DashboardSidebar />
-      <main>{children}</main>
+      <main className="flex-1">{children}</main>
     </div>
   );
 };

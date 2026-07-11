@@ -54,7 +54,7 @@ const PostATask = () => {
         theme: "light",
         transition: Bounce,
       });
-      //   redirect("/dashboard/client/my-tasks");
+      redirect("/dashboard/client/my-tasks");
     } else {
       toast.error("Failed to create task.", {
         position: "top-center",

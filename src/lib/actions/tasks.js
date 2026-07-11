@@ -10,3 +10,13 @@ export const postATask = async (taskData) => {
   });
   return response.json();
 };
+
+export const getTaskById = async (id) => {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/task/get/byClient/${id}`,
+    {
+      method: "GET",
+    },
+  );
+  return response.json();
+};
