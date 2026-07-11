@@ -3,6 +3,7 @@ import "./globals.css";
 import NavbarSection from "@/Components/MainComponents/NavbarSection";
 import Providers from "@/Components/MainComponents/ThemeProvider";
 import FooterSection from "@/Components/MainComponents/FooterSecction";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,19 @@ export default function RootLayout({ children }) {
           <NavbarSection />
           <main>{children}</main>
           <FooterSection />
+          <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+          />
         </Providers>
       </body>
     </html>
