@@ -12,6 +12,7 @@ import { FiLogOut } from "react-icons/fi";
 
 const NavbarSection = () => {
   const { data, isPending } = authClient.useSession();
+  console.log("NavbarSection data", data);
   const links = (
     <>
       <NavLink href="/">
