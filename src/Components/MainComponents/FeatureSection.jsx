@@ -1,8 +1,13 @@
+import { FeatureTaskSix } from "@/lib/actions/tasks";
+import { Button } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaPlus } from "react-icons/fa6";
+import BrowseTask from "./AllSection/BrowseTask";
 
-const FeatureSection = () => {
+const FeatureSection = async () => {
+  const data = await FeatureTaskSix();
+  console.log("FeatureTaskSix", data);
   return (
     <div className="my-10 w-11/12 mx-auto">
       <h3 className="text-4xl max-sm:text-2xl font-bold ">
@@ -17,9 +22,9 @@ const FeatureSection = () => {
           </p>
         </Link>
       </div>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
         {data.length > 0 ? (
-          data.map((task) => <OpenTask key={task._id} task={task} />)
+          data.map((task) => <BrowseTask key={task._id} task={task} />)
         ) : (
           <div className="text-gray-500 text-center col-span-full flex flex-col items-center justify-center my-10">
             <p>No feature tasks available at the moment.</p>
@@ -34,7 +39,7 @@ const FeatureSection = () => {
             </Link>
           </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };

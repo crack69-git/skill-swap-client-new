@@ -51,3 +51,33 @@ export const ddeleteTaskById = async (id) => {
   );
   return response.json();
 };
+
+export const browseOpenTasks = async (
+  name = "",
+  skill = "",
+  currentPage = 1,
+) => {
+  const params = new URLSearchParams();
+  if (name) params.append("name", name);
+  if (skill) params.append("skill", skill);
+  params.append("page", currentPage);
+  params.append("limit", 9);
+  console.log("params", params.toString());
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/task/browseOpenTasks?${params.toString()}`,
+    {
+      method: "GET",
+    },
+  );
+  return response.json();
+};
+
+export const FeatureTaskSix = async () => {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/task/featureTaskSix`,
+    {
+      method: "GET",
+    },
+  );
+  return response.json();
+};

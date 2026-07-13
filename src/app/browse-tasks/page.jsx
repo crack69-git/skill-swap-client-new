@@ -1,5 +1,18 @@
-import { Input, Label, ListBox, Select } from "@heroui/react";
+import BrowseTask from "@/Components/MainComponents/AllSection/BrowseTask";
+import PaginationComponent from "@/Components/MainComponents/Pagination/PaginationComponent";
+import { browseOpenTasks } from "@/lib/actions/tasks";
+import {
+  Button,
+  Card,
+  CardFooter,
+  Input,
+  Label,
+  ListBox,
+  Select,
+} from "@heroui/react";
 import React from "react";
+import { BiTaskX } from "react-icons/bi";
+import { FaPlus } from "react-icons/fa6";
 import { RiFilter3Line } from "react-icons/ri";
 
 const page = async ({ searchParams }) => {
@@ -9,12 +22,14 @@ const page = async ({ searchParams }) => {
   //   });
   const name = params.name || "";
   const skill = params.skill || "";
+  console.log(name, skill);
   const currentPage = parseInt(params.page || "1", 10);
-  //   const { tasks = [], totalItems = 0 } = await getOpenTasks(
-  //     name,
-  //     skill,
-  //     currentPage,
-  //   );
+  const { tasks = [], totalItems = 0 } = await browseOpenTasks(
+    name,
+    skill,
+    currentPage,
+  );
+  console.log("tasks", tasks);
   const selectOptions = (
     <>
       <ListBox.Item id="frontend-development" textValue="Frontend Development">
@@ -215,7 +230,7 @@ const page = async ({ searchParams }) => {
       <div>
         <h1 className="text-3xl font-bold">Available Tasks</h1>
         <p>
-          {/* Explore <span className="font-bold">{totalItems}</span> available */}
+          Explore <span className="font-bold">{totalItems}</span> available
           tasks
         </p>
 
@@ -260,12 +275,11 @@ const page = async ({ searchParams }) => {
 
         {/* Cards Display Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-          {/* {tasks.length > 0 ? (
-            tasks.map((task) => <OpenTask key={task._id} task={task} />)
+          {tasks.length > 0 ? (
+            tasks.map((task) => <BrowseTask key={task._id} task={task} />)
           ) : (
             <div className="col-span-3  mt-10">
               <Card className="p-4 mx-auto shadow-md border border-default-200">
-
                 <div className="flex flex-col items-center justify-center text-center py-6 px-4">
                   <h3 className="flex flex-col items-center justify-center text-lg font-semibold text-foreground">
                     <BiTaskX className="text-3xl" />
@@ -285,11 +299,11 @@ const page = async ({ searchParams }) => {
                 </CardFooter>
               </Card>
             </div>
-          )} */}
+          )}
         </div>
 
         {/* Pagination Navigation Interface */}
-        {/* <PaginationComponent totalItems={totalItems} itemsPerPage={9} /> */}
+        <PaginationComponent totalItems={totalItems} itemsPerPage={9} />
       </div>
     </div>
   );
