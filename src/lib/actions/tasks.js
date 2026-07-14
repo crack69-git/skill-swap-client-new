@@ -81,3 +81,13 @@ export const FeatureTaskSix = async () => {
   );
   return response.json();
 };
+
+export const getSingleTaskById = async (id) => {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/task/getSingleTaskById/${id}`,
+    {
+      method: "GET",
+    },
+  );
+  return response.json();
+};
