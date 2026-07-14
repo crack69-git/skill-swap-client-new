@@ -14,7 +14,7 @@ const page = async () => {
   const res = await getTaskProposalsByEmail(email);
   console.log(res);
   return (
-    <div className="w-11/12 mx-auto my-5">
+    <div className="w-11/12 mx-auto my-5 min-h-screen">
       <h1 className="text-3xl font-bold mb-5">My Proposals</h1>
       <Table variant="secondary">
         <Table.ScrollContainer>
