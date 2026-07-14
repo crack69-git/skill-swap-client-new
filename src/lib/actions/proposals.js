@@ -36,3 +36,19 @@ export const getTaskProposals = async () => {
     throw new Error("Failed to fetch task proposals.");
   }
 };
+
+export const getTaskProposalsByEmail = async (email) => {
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/task/getTaskProposalsByEmail/${email}`,
+      {
+        method: "GET",
+      },
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error fetching task proposals by email:", error);
+    throw new Error("Failed to fetch task proposals by email.");
+  }
+};
