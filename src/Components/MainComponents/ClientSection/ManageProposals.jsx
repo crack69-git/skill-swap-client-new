@@ -6,8 +6,22 @@ import React from "react";
 
 const ManageProposals = ({ proposal }) => {
   const router = useRouter();
-  const handleCheckout = (proposalId) => {
-    console.log(`Accepting proposal with ID: ${proposalId}`);
+  const handleCheckout = async (proposalId) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/create-checkout-session`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          proposalId,
+        }),
+      },
+    );
+    const data = await res.json();
+
+    window.location.href = data.url;
   };
   const handleReject = async (proposalId, status) => {
     const res = await patchTaskProposalById(proposalId, { status: "rejected" });

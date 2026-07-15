@@ -24,7 +24,7 @@ const MyTaskPage = async () => {
     <div className="mt-5 w-11/12 mx-auto">
       <h2 className="text-4xl font-bold">My Tasks</h2>
       <p>This is the page where clients can view their tasks.</p>
-      <div className="my-10 grid grid-cols-2 md:grid-cols-3 gap-5 border w-full">
+      <div className="my-10 grid grid-cols-2 md:grid-cols-3 gap-5 w-full">
         {res.length > 0 ? (
           res.map((tasks, index) => <MyTasksCard key={index} tasks={tasks} />)
         ) : (
