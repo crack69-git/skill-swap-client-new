@@ -88,3 +88,19 @@ export const patchTaskProposalById = async (proposalId, updatedData) => {
     throw new Error("Failed to update task proposal.");
   }
 };
+
+export const getInPendingProposalByEmail = async (email) => {
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/task/getInPendingProposalByEmail/${email}`,
+      {
+        method: "GET",
+      },
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error fetching in-pending proposals by email:", error);
+    throw new Error("Failed to fetch in-pending proposals by email.");
+  }
+};

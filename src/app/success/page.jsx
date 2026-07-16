@@ -50,7 +50,7 @@ export default async function Success({ searchParams }) {
 
     if (paymentResponse.success) {
       const res1 = await patchTaskProposalById(metadata.proposalId, {
-        status: "accepted",
+        status: "in-progress",
       });
 
       const res2 = await patchTaskById(metadata.taskId, {
