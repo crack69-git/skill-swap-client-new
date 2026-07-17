@@ -19,3 +19,19 @@ export const postTaskPayment = async (paymentData) => {
     throw new Error("Failed to submit payment.");
   }
 };
+
+export const getFreelancerPaymentByEmail = async (email) => {
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/task/getFreelancerPaymentByEmail/${email}`,
+      {
+        method: "GET",
+      },
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error fetching freelancer payments:", error);
+    throw new Error("Failed to fetch freelancer payments.");
+  }
+};

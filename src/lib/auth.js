@@ -35,6 +35,9 @@ export const auth = betterAuth({
               ...user,
               // Fallback to "client" ONLY if no role was provided in the signup data
               role: user.role || "client",
+              bio: "no data",
+              hourlyRate: 0,
+              skills: [""],
               userState: "unblocked",
             },
           };
