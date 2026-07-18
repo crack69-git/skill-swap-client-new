@@ -276,6 +276,7 @@ const PostATask = () => {
               <FieldError />
             </TextField>
             <Select
+              isRequired
               className="max-w-96"
               name="category"
               placeholder="Select one"
@@ -294,7 +295,7 @@ const PostATask = () => {
               <Input placeholder="$00.00" />
               <FieldError />
             </TextField>
-            <DateField className="max-w-96" name="deadline">
+            <DateField isRequired className="max-w-96" name="deadline">
               <Label>Deadline</Label>
               <DateField.Group>
                 <DateField.Input>

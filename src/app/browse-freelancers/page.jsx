@@ -1,12 +1,26 @@
-import { Input, Label, ListBox, Select } from "@heroui/react";
+import FreelancerBrowse from "@/Components/MainComponents/FreelancerSection/BrowseFreelancer";
+import { getFreelancer } from "@/lib/actions/users";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  Input,
+  Label,
+  ListBox,
+  Select,
+} from "@heroui/react";
 import React from "react";
+import { FaUserSlash } from "react-icons/fa";
 import { RiFilter3Line } from "react-icons/ri";
 
-const BrowseFreelancer = async ({ searchParams }) => {
+const page = async ({ searchParams }) => {
   const params = await searchParams;
   const name = params.name || "";
   const skill = params.skill || "";
-  //   const data = await getFreelancer(name, skill);
+  console.log("Search Params:", params);
+  const data = await getFreelancer(name, skill);
+  console.log("Freelancers:", data);
 
   const selectOptions = (
     <>
@@ -241,7 +255,7 @@ const BrowseFreelancer = async ({ searchParams }) => {
           Filter
         </button>
       </form>
-      {/* {data && data.length > 0 ? (
+      {data && data.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 h-full">
           {data.map((freelancer) => (
             <FreelancerBrowse key={freelancer._id} data={freelancer} />
@@ -250,7 +264,6 @@ const BrowseFreelancer = async ({ searchParams }) => {
       ) : (
         <div className="w-full max-w-md mx-auto mt-8">
           <Card className="p-4 shadow-md border border-default-200">
-            
             <div className="flex flex-col items-center justify-center text-center py-6 px-4">
               <h3 className="text-lg font-semibold text-foreground">
                 No Freelancers Available
@@ -260,13 +273,11 @@ const BrowseFreelancer = async ({ searchParams }) => {
                 loosening your search filters or checking back soon.
               </p>
             </div>
-
-        
           </Card>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
 
-export default BrowseFreelancer;
+export default page;

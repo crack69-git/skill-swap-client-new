@@ -20,3 +20,20 @@ export const patchUserInfoById = async (id, updatedUser) => {
   );
   return response.json();
 };
+
+export const getFreelancer = async (name = "", skill = "") => {
+  const params = new URLSearchParams();
+
+  if (name) params.append("name", name);
+  if (skill) params.append("skill", skill);
+  console.log("Fetching freelancers with params:", params.toString());
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/user/freelancer/all?${params.toString()}`,
+    {
+      method: "GET",
+      cache: "no-store",
+    },
+  );
+
+  return res.json();
+};
