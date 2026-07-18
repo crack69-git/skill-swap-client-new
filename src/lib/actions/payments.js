@@ -35,3 +35,14 @@ export const getFreelancerPaymentByEmail = async (email) => {
     throw new Error("Failed to fetch freelancer payments.");
   }
 };
+
+export const getAllPayments = async () => {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/task/getAllPayments/admin`,
+    {
+      method: "GET",
+    },
+  );
+  const result = await response.json();
+  return result;
+};

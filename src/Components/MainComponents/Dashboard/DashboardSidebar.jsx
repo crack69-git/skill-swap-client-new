@@ -61,7 +61,7 @@ const DashboardSideBar = async () => {
             <NavLink href="/dashboard/admin/manage-tasks">
               <li>Manage Tasks </li>
             </NavLink>
-            <NavLink href="/dashboard/admin/transections-history">
+            <NavLink href="/dashboard/admin/transection-history">
               <li>Transaction History </li>
             </NavLink>
           </ul>
