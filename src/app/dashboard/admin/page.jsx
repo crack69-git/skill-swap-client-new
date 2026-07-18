@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Spinner } from "@heroui/react";
 import { redirect } from "next/navigation";
+import DashboardStat from "@/Components/MainComponents/DashboardStat";
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -27,7 +28,7 @@ const page = async () => {
           </div>
         }
       >
-        {/* <InfoTrace user={user} /> */}
+        <DashboardStat user={user} />
       </Suspense>
     </div>
   );

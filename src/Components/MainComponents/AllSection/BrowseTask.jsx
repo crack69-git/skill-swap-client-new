@@ -3,10 +3,11 @@ import { Button, Separator } from "@heroui/react";
 import Link from "next/link";
 
 const BrowseTask = async ({ task }) => {
+  console.log("task", task);
   return (
     <div className="border bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg p-4">
       <p
-        className={`font-semibold w-fit mb-3 px-5 rounded-3xl ${task.status === "Open" ? "bg-purple-200 dark:bg-purple-500" : task.status === "In Progress" ? "bg-yellow-200 dark:bg-yellow-500" : "bg-green-200 dark:bg-green-500"}`}
+        className={`font-semibold w-fit mb-3 px-5 rounded-3xl ${task.status === "Open" ? "bg-purple-200 dark:bg-purple-500" : task.status === "in-progress" ? "bg-blue-200 dark:bg-blue-500" : task.status === "completed" ? "bg-yellow-200 dark:bg-yellow-500" : "bg-green-200 dark:bg-green-500"}`}
       >
         {task.status}
       </p>

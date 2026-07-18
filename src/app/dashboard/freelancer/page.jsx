@@ -4,6 +4,8 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Spinner } from "@heroui/react";
 import { redirect } from "next/navigation";
+import DashboardStat from "@/Components/MainComponents/DashboardStat";
+import ProfileSection from "@/Components/MainComponents/FreelancerSection/ProfileSection";
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -16,9 +18,9 @@ const page = async () => {
     redirect("/access-blocked");
   }
   return (
-    <div className="w-11/12 mx-auto mt-5">
+    <div className="w-11/12 mx-auto mt-5 min-h-screen">
       <h3 className="text-3xl font-bold">Freelancer Dashboard</h3>
-      <p>Welcome, {session?.user?.name}! This is your client dashboard.</p>
+      <p>Welcome, {session?.user?.name}! This is your freelancer dashboard.</p>
       <Suspense
         fallback={
           <div className="flex flex-col items-center gap-2">
@@ -27,7 +29,8 @@ const page = async () => {
           </div>
         }
       >
-        {/* <InfoTrace user={user} /> */}
+        <DashboardStat user={user} />
+        <ProfileSection user={user} />
       </Suspense>
     </div>
   );
