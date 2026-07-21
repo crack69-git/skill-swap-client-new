@@ -36,11 +36,14 @@ export const getFreelancerPaymentByEmail = async (email) => {
   }
 };
 
-export const getAllPayments = async () => {
+export const getAllPayments = async (token) => {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/task/getAllPayments/admin`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   const result = await response.json();

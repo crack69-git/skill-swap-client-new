@@ -40,7 +40,7 @@ const DashboardStat = async ({ user }) => {
   );
 
   const totalUsers = await getAllUsers(token.token);
-  const revenue = await getAllPayments();
+  const revenue = await getAllPayments(token.token);
   const totalRevenue = revenue.reduce(
     (accumulator, currentValue) => accumulator + currentValue.amount_received,
     0,
