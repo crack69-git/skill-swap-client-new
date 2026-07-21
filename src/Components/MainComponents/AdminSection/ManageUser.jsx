@@ -4,11 +4,8 @@ import { Rocket } from "lucide-react";
 import React from "react";
 
 const ManageUser = ({ user }) => {
-  console.log("Rendering ManageUser for user:", user); // Log the user prop for debugging
   const currentStatus = user?.userStatus || "unblocked";
-  //   const handleUserStateChange = async (userId, currentStatus) => {
-  //     console.log(`Changing status for user ${userId} from ${currentStatus}`);
-  //   };
+
   return (
     <Table.Row>
       <Table.Cell>{user?.name || "Unknown Name"}</Table.Cell>

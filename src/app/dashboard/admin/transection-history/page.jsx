@@ -1,12 +1,17 @@
 import TransectionHistory from "@/Components/MainComponents/AdminSection/TransectionHistory";
 import { getAllPayments } from "@/lib/actions/payments";
+import { auth } from "@/lib/auth";
 
 import { Table } from "@heroui/react";
+import { headers } from "next/headers";
 import React from "react";
 
 const page = async () => {
-  const payments = await getAllPayments();
-  // console.log("Payments:", payments);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const payments = await getAllPayments(token);
+
   return (
     <div className="w-11/12 mx-auto my-5">
       <h1 className="mb-5 text-3xl font-bold">Transaction History</h1>
@@ -26,7 +31,11 @@ const page = async () => {
                   <TransectionHistory key={payment._id} payment={payment} />
                 ))
               ) : (
-                <div>No payments found</div>
+                <Table.Row>
+                  <Table.Cell colSpan={5} className="text-center">
+                    No users found
+                  </Table.Cell>
+                </Table.Row>
               )}
             </Table.Body>
           </Table.Content>

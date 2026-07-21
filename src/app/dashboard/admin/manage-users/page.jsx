@@ -1,11 +1,15 @@
 import ManageUser from "@/Components/MainComponents/AdminSection/ManageUser";
 import { getAllUsers } from "@/lib/actions/users";
+import { auth } from "@/lib/auth";
 import { Table } from "@heroui/react";
+import { headers } from "next/headers";
 import React from "react";
 
 const page = async () => {
-  const res = await getAllUsers();
-  console.log("Fetched users:", res); // Log the fetched users for debugging
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const res = await getAllUsers(token);
   return (
     <div className="w-11/12 mx-auto my-5">
       <h2 className="text-3xl font-bold">Manage Users</h2>
@@ -27,10 +31,9 @@ const page = async () => {
                 ) : (
                   // Safe fallback if there are zero users or connection is broken
                   <Table.Row>
-                    <Table.Cell>No users found</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
+                    <Table.Cell colSpan={4} className="text-center">
+                      No users found
+                    </Table.Cell>
                   </Table.Row>
                 )}
               </Table.Body>
