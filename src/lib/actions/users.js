@@ -37,3 +37,15 @@ export const getFreelancer = async (name = "", skill = "") => {
 
   return res.json();
 };
+
+export const getAllFreelancer = async () => {
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/user/freelancer/mostWorkDone`,
+    {
+      method: "GET",
+      cache: "no-store",
+    },
+  );
+
+  return res.json();
+};
