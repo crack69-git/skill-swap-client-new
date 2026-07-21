@@ -1,12 +1,16 @@
 "use client";
 import { patchTaskProposalById } from "@/lib/actions/proposals";
+import { authClient } from "@/lib/auth-client";
 import { Button, Table } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 
 const ManageProposals = ({ proposal }) => {
   const router = useRouter();
   const handleCheckout = async (proposalId) => {
+    const { data: token, error } = await authClient.token();
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/create-checkout-session`,
       {
@@ -24,12 +28,17 @@ const ManageProposals = ({ proposal }) => {
     window.location.href = data.url;
   };
   const handleReject = async (proposalId, status) => {
-    const res = await patchTaskProposalById(proposalId, { status: "rejected" });
+    const { data: token, error } = await authClient.token();
+    const res = await patchTaskProposalById(
+      proposalId,
+      { status: "rejected" },
+      token.token,
+    );
     if (res) {
-      alert("Proposal rejected successfully");
+      toast.success("Proposal rejected successfully");
       router.refresh();
     } else {
-      alert("Proposal rejected failed");
+      toast.error("Proposal rejected failed");
     }
   };
   return (

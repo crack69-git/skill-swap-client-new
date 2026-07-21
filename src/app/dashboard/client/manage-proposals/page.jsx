@@ -8,10 +8,13 @@ const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log(session);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   const id = session?.user?.id;
-  const data = await getProposalByClientId(id);
-  console.log(data);
+  const data = await getProposalByClientId(id, token);
+  console.log("data", data);
 
   return (
     <div className="w-11/12 mx-auto my-5 min-h-screen">
@@ -28,9 +31,17 @@ const page = async () => {
               <Table.Column>Action</Table.Column>
             </Table.Header>
             <Table.Body>
-              {data?.map((proposal) => (
-                <ManageProposals key={proposal._id} proposal={proposal} />
-              ))}
+              {data?.length > 0 ? (
+                data?.map((proposal) => (
+                  <ManageProposals key={proposal._id} proposal={proposal} />
+                ))
+              ) : (
+                <Table.Row>
+                  <Table.Cell colSpan={6} className="text-center">
+                    No proposals found.
+                  </Table.Cell>
+                </Table.Row>
+              )}
             </Table.Body>
           </Table.Content>
         </Table.ScrollContainer>

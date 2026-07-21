@@ -9,10 +9,12 @@ const MyTaskPage = async () => {
     headers: await headers(),
   });
   const id = session?.user?.id;
-  console.log("User ID in MyTaskPage:", id);
 
-  const res = await getTaskById(id);
-  console.log("Tasks fetched for user:", res);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const res = await getTaskById(id, token);
 
   if (session?.user?.role !== "client") {
     redirect("/unauthorize");

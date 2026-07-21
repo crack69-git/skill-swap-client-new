@@ -1,21 +1,25 @@
 "use server";
 
-export const postATask = async (taskData) => {
+export const postATask = async (taskData, token) => {
   const response = await fetch(`${process.env.BACKEND_URL}/api/task/post`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(taskData),
   });
   return response.json();
 };
 
-export const getTaskById = async (id) => {
+export const getTaskById = async (id, token) => {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/task/get/byClient/${id}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return response.json();

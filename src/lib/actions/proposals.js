@@ -53,12 +53,15 @@ export const getTaskProposalsByEmail = async (email) => {
   }
 };
 
-export const getProposalByClientId = async (id) => {
+export const getProposalByClientId = async (id, token) => {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/task/getProposalByClientId/${id}`,
       {
         method: "GET",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       },
     );
     const result = await response.json();
@@ -69,7 +72,7 @@ export const getProposalByClientId = async (id) => {
   }
 };
 
-export const patchTaskProposalById = async (proposalId, updatedData) => {
+export const patchTaskProposalById = async (proposalId, updatedData, token) => {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/task/patchTaskProposalById/${proposalId}`,
@@ -77,6 +80,7 @@ export const patchTaskProposalById = async (proposalId, updatedData) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(updatedData),
       },

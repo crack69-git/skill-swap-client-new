@@ -20,8 +20,10 @@ import { redirect } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { Bounce, toast } from "react-toastify";
 import { postATask } from "@/lib/actions/tasks";
+
 const PostATask = () => {
   const { data: session } = authClient.useSession();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -39,8 +41,9 @@ const PostATask = () => {
       state: "pending",
       description: data.description,
     };
-
-    const res = await postATask(tasks);
+    const { data: value, error } = await authClient.token();
+    console.log("Token in PostATask component:", value);
+    const res = await postATask(tasks, value);
 
     if (res) {
       toast.success("Task created successfully!", {
