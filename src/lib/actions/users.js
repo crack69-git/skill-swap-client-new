@@ -1,8 +1,11 @@
 "use server";
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (token) => {
   const response = await fetch(`${process.env.BACKEND_URL}/api/user/allusers`, {
     method: "GET",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
   return response.json();
 };
