@@ -11,6 +11,7 @@ import {
 } from "@heroui/react";
 import { redirect, useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 const Page = () => {
   const router = useRouter();
   const onSubmit = async (e) => {
@@ -24,11 +25,11 @@ const Page = () => {
       rememberMe: true,
     });
     if (data) {
-      alert("Login successful! ");
+      toast.success("Login successful! ");
       router.push("/"); // Redirect to the dashboard page after successful login
     }
     if (error) {
-      alert("Error logging in");
+      toast.error("Error logging in");
     }
   };
   const handleGoogle = async () => {
