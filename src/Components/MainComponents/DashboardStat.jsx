@@ -5,6 +5,8 @@ import {
 import { getTaskProposals } from "@/lib/actions/proposals";
 import { getAllTasks } from "@/lib/actions/tasks";
 import { getAllUsers } from "@/lib/actions/users";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import React from "react";
 import { FcParallelTasks } from "react-icons/fc";
 import { MdOutlinePendingActions } from "react-icons/md";
@@ -12,7 +14,11 @@ import { RiProgress6Line } from "react-icons/ri";
 import { VscCopilotSuccess } from "react-icons/vsc";
 
 const DashboardStat = async ({ user }) => {
-  const totalTasks = await getAllTasks();
+  const token = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const totalTasks = await getAllTasks(token.token);
   const pendingTasks = totalTasks.filter((task) => task?.status === "Open");
   const completedTasks =
     totalTasks.filter((task) => task?.status === "completed") || 0;
@@ -33,7 +39,7 @@ const DashboardStat = async ({ user }) => {
     0,
   );
 
-  const totalUsers = await getAllUsers();
+  const totalUsers = await getAllUsers(token.token);
   const revenue = await getAllPayments();
   const totalRevenue = revenue.reduce(
     (accumulator, currentValue) => accumulator + currentValue.amount_received,

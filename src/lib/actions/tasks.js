@@ -21,9 +21,12 @@ export const getTaskById = async (id) => {
   return response.json();
 };
 
-export const getAllTasks = async () => {
+export const getAllTasks = async (token) => {
   const response = await fetch(`${process.env.BACKEND_URL}/api/task/alltasks`, {
     method: "GET",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
   return response.json();
 };
