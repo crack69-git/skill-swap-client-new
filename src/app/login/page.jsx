@@ -31,10 +31,11 @@ const Page = () => {
       alert("Error logging in");
     }
   };
-  // const handleGoogle = () => {
-  //   // Implement Google sign-in logic here
-  //   console.log("Google sign-in clicked");
-  // };
+  const handleGoogle = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className="w-11/12 mx-auto flex items-center justify-center my-20">
       <Form
@@ -81,7 +82,7 @@ const Page = () => {
           <p className="bg-gray-500 h-0.5 w-full"></p>
         </div>
 
-        <Button variant="outline" className="w-full">
+        <Button onClick={handleGoogle} variant="outline" className="w-full">
           <FcGoogle />
           Sign-in with GOOGLE
         </Button>
