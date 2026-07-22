@@ -13,7 +13,7 @@ const page = async () => {
   const payments = await getAllPayments(token);
 
   return (
-    <div className="w-11/12 mx-auto my-5">
+    <div className="w-11/12 mx-auto my-5 min-h-screen">
       <h1 className="mb-5 text-3xl font-bold">Transaction History</h1>
       <Table variant="secondary">
         <Table.ScrollContainer>

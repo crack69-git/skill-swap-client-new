@@ -15,7 +15,7 @@ const page = async () => {
   const data = await getInPendingProposalByEmail(email, token);
 
   return (
-    <div className="w-11/12 mx-auto my-5">
+    <div className="w-11/12 mx-auto my-5 min-h-screen">
       <h1 className="text-3xl font-bold">Active Projects Page</h1>
 
       <div className="mt-5 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-4 h-full">
