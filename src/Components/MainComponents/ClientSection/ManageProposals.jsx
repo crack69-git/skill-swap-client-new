@@ -49,7 +49,9 @@ const ManageProposals = ({ proposal }) => {
       <Table.Cell>{proposal.estimateDeliveryDate}</Table.Cell>
       <Table.Cell>{proposal.note}</Table.Cell>
       <Table.Cell>
-        {proposal.status === "accepted" ? (
+        {proposal.status === "rejected" ? (
+          <p>Rejected</p>
+        ) : proposal.status === "accepted" ? (
           <p>Accepted</p>
         ) : (
           <div className="flex flex-col justify-center items-center gap-2">
