@@ -5,6 +5,10 @@ import ManageTasks from "@/Components/MainComponents/AdminSection/ManageTasks";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+export const metadata = {
+  title: "Manage Tasks - Admin",
+  description: "Manage and administer tasks within the SkillSwap platform.",
+};
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

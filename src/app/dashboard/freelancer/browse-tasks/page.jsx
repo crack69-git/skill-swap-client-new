@@ -17,6 +17,10 @@ import React from "react";
 import { BiTaskX } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
 import { RiFilter3Line } from "react-icons/ri";
+export const metadata = {
+  title: "Browse Tasks - Freelancer",
+  description: "Find and apply for open tasks on the SkillSwap platform.",
+};
 const page = async ({ searchParams }) => {
   const params = await searchParams;
   const session = await auth.api.getSession({

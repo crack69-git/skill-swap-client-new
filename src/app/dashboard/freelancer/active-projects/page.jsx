@@ -4,7 +4,10 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
-
+export const metadata = {
+  title: "Active Projects - Freelancer",
+  description: "View your active projects on the SkillSwap platform.",
+};
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

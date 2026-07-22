@@ -1,11 +1,15 @@
 import React, { Suspense } from "react";
-// import InfoTrace from "../InfoTrace";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Spinner } from "@heroui/react";
 import { redirect } from "next/navigation";
 import DashboardStat from "@/Components/MainComponents/DashboardStat";
 import ProfileSection from "@/Components/MainComponents/FreelancerSection/ProfileSection";
+export const metadata = {
+  title: "Dashboard - Freelancer",
+  description:
+    "Access your freelancer dashboard to manage your profile, view statistics, and stay updated on your tasks and projects.",
+};
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

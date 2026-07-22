@@ -8,7 +8,10 @@ import React from "react";
 import { IoTimer } from "react-icons/io5";
 import { LuTimerOff } from "react-icons/lu";
 import { MdCategory } from "react-icons/md";
-
+export const metadata = {
+  title: "Task Details - Freelancer",
+  description: "View the details of a specific task on the SkillSwap platform.",
+};
 const page = async ({ params }) => {
   const { id } = await params;
 

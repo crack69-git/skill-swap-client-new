@@ -5,6 +5,11 @@ import { headers } from "next/headers";
 import React from "react";
 import ManageProposals from "@/Components/MainComponents/ClientSection/ManageProposals.jsx";
 import { redirect } from "next/navigation";
+export const metadata = {
+  title: "Manage Proposals - Client",
+  description:
+    "Manage and view proposals for your tasks on the SkillSwap platform.",
+};
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

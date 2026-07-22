@@ -1,10 +1,15 @@
 import React, { Suspense } from "react";
-// import InfoTrace from "../InfoTrace";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Spinner } from "@heroui/react";
 import { redirect } from "next/navigation";
 import DashboardStat from "@/Components/MainComponents/DashboardStat";
+
+export const metadata = {
+  title: "Dashboard - Admin",
+  description:
+    "Access the admin dashboard to manage users, tasks, and platform settings.",
+};
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

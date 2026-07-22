@@ -5,7 +5,11 @@ import { Table } from "@heroui/react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
-
+export const metadata = {
+  title: "Manage Users - Admin",
+  description:
+    "Manage and administer user accounts within the SkillSwap platform.",
+};
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

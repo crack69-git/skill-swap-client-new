@@ -14,12 +14,13 @@ import React from "react";
 import { BiTaskX } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
 import { RiFilter3Line } from "react-icons/ri";
-
+export const metadata = {
+  title: "Browse Tasks - SkillSwap",
+  description: "Discover available tasks and their details.",
+};
 const page = async ({ searchParams }) => {
   const params = await searchParams;
-  //   const session = await auth.api.getSession({
-  //     headers: await headers(),
-  //   });
+
   const name = params.name || "";
   const skill = params.skill || "";
   console.log(name, skill);
@@ -29,7 +30,7 @@ const page = async ({ searchParams }) => {
     skill,
     currentPage,
   );
-  console.log("tasks", tasks);
+
   const selectOptions = (
     <>
       <ListBox.Item id="frontend-development" textValue="Frontend Development">

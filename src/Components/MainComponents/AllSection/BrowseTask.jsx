@@ -3,6 +3,7 @@ import { Button, Separator } from "@heroui/react";
 import Link from "next/link";
 
 const BrowseTask = async ({ task }) => {
+  const id = task._id;
   return (
     <div className="border bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg p-4">
       <p
@@ -24,7 +25,7 @@ const BrowseTask = async ({ task }) => {
       <div className="flex justify-between items-center mt-2">
         <p>Deadline: {task.deadline}</p>
         <div className={`flex gap-2 `}>
-          <Link href={`/browse-tasks/${task._id}`}>
+          <Link href={`/browse-tasks/${id}`}>
             <Button variant="primary" size="md" className="mt-2">
               View Details
             </Button>

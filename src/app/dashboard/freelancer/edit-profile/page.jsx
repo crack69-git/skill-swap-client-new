@@ -3,6 +3,11 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import EditProfileSection from "@/Components/MainComponents/FreelancerSection/EditProfileSection";
+export const metadata = {
+  title: "Edit Profile - Freelancer",
+  description:
+    "Update your freelancer profile information on the SkillSwap platform.",
+};
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

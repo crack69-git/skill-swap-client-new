@@ -4,6 +4,10 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTaskById } from "@/lib/actions/tasks";
 import MyTasksCard from "@/Components/MainComponents/ClientSection/MyTasksCard";
+export const metadata = {
+  title: "My Tasks - Client",
+  description: "View and manage your tasks on the SkillSwap platform.",
+};
 const MyTaskPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

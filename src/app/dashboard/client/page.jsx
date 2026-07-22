@@ -1,11 +1,15 @@
 import React, { Suspense } from "react";
-// import InfoTrace from "../InfoTrace";
+
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Spinner } from "@heroui/react";
 import { redirect } from "next/navigation";
-import BrowseTask from "@/Components/MainComponents/AllSection/BrowseTask";
 import DashboardStat from "@/Components/MainComponents/DashboardStat";
+export const metadata = {
+  title: "Dashboard - Client",
+  description:
+    "Access your client dashboard to manage tasks, view statistics, and stay updated on your projects.",
+};
 const ClientHomepage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

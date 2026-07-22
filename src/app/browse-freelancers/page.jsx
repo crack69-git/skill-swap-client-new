@@ -1,19 +1,13 @@
 import FreelancerBrowse from "@/Components/MainComponents/FreelancerSection/BrowseFreelancer";
 import { getFreelancer } from "@/lib/actions/users";
-import {
-  Button,
-  Card,
-  CardFooter,
-  CardHeader,
-  Input,
-  Label,
-  ListBox,
-  Select,
-} from "@heroui/react";
+import { Card, Input, Label, ListBox, Select } from "@heroui/react";
 import React from "react";
-import { FaUserSlash } from "react-icons/fa";
-import { RiFilter3Line } from "react-icons/ri";
 
+import { RiFilter3Line } from "react-icons/ri";
+export const metadata = {
+  title: "Browse Freelancers - SkillSwap",
+  description: "Discover Freelancer and their details.",
+};
 const page = async ({ searchParams }) => {
   const params = await searchParams;
   const name = params.name || "";

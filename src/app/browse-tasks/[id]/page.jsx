@@ -7,6 +7,10 @@ import React from "react";
 import { IoTimer } from "react-icons/io5";
 import { LuTimerOff } from "react-icons/lu";
 import { MdCategory } from "react-icons/md";
+export const metadata = {
+  title: "Task Details - SkillSwap",
+  description: "View detailed information about a specific task.",
+};
 
 const page = async ({ params }) => {
   const { id } = await params;
@@ -50,7 +54,7 @@ const page = async ({ params }) => {
       </div>
       {role === "freelancer" && (
         <div className="col-span-1  rounded-lg p-5 shadow-lg">
-          <ProposalForm taskId={id} />
+          <ProposalForm data={data} />
         </div>
       )}
     </div>

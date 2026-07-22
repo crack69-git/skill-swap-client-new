@@ -3,7 +3,11 @@ import { auth } from "@/lib/auth";
 
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-
+export const metadata = {
+  title: "Post a Task - Client",
+  description:
+    "Post a new task on the SkillSwap platform and find the right talent for your needs.",
+};
 const PostATaskPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
