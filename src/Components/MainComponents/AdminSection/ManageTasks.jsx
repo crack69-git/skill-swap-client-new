@@ -12,7 +12,7 @@ const ManageTasks = ({ task }) => {
   const handleDeleteRequest = async (taskId) => {
     const { data: token, error } = await authClient.token();
     const res = await deleteTaskById(taskId, token.token);
-    console.log(res);
+
     if (res.acknowledged) {
       toast.success("Task deleted successfully", {
         position: "top-center",

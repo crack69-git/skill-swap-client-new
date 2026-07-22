@@ -22,15 +22,12 @@ import { Bounce, toast } from "react-toastify";
 const ProposalForm = ({ data }) => {
   const variant = "blur";
   const { data: session } = authClient.useSession();
-  console.log("data", data);
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const current = Object.fromEntries(formData.entries());
     const toady = new Date().toISOString().split("T")[0];
-    console.log("toady", toady);
-    console.log("current", current);
 
     const proposalData = {
       clientId: data.clientId,
@@ -45,9 +42,9 @@ const ProposalForm = ({ data }) => {
       freelancerMail: session?.user?.email,
       status: "pending",
     };
-
-    const proposal = await getTaskProposals();
-
+    const { data: token, error } = await authClient.token();
+    const proposal = await getTaskProposals(token.token);
+    console.log(proposal);
     const exixts = proposal.find(
       (proposal) =>
         proposal.taskId === data._id &&
@@ -71,6 +68,7 @@ const ProposalForm = ({ data }) => {
     } else {
       const { data: token, error } = await authClient.token();
       const response = await postTaskProposal(proposalData, token.token);
+      console.log(response);
 
       if (response.acknowledged) {
         toast.success("Proposal submitted successfully!", {
