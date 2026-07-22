@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Name
 
-## Getting Started
+SkillSwap
 
-First, run the development server:
+## Purpose
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+SkillSwap is a modern web application designed to connect clients with skilled freelancers for various tasks and projects. It provides a platform for clients to post tasks, browse freelancer profiles, and manage proposals, while freelancers can find tasks, submit proposals, manage active projects, and track their earnings. The application features distinct dashboards for administrators, clients, and freelancers to ensure a tailored user experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live Website
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+https://skill-swap-client-new.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Features
 
-## Learn More
+### User Management and Authentication
 
-To learn more about Next.js, take a look at the following resources:
+- User registration and login.
+- Role-based access control (Admin, Client, Freelancer).
+- Secure authentication powered by `better-auth`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Task Management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Clients can post new tasks with detailed descriptions.
+- Freelancers can browse available tasks and view task details.
+- Admins can manage all tasks on the platform.
 
-## Deploy on Vercel
+### Proposal Management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Freelancers can submit proposals for tasks.
+- Clients can manage proposals received for their posted tasks.
+- Freelancers can track the status of their submitted proposals.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Dashboard Functionality
+
+- **Admin Dashboard:** Manage users, tasks, and view transaction history.
+- **Client Dashboard:** Post tasks, manage own tasks, and manage proposals.
+- **Freelancer Dashboard:** Browse tasks, manage active projects, edit profile, and view earnings.
+
+### User Profiles
+
+- Freelancers can create and edit detailed profiles showcasing their skills and experience.
+
+### Payments
+
+- Integration with Stripe for payment processing.
+
+### Theming
+
+- Light and Dark mode toggle for enhanced user experience.
+
+## Technologies Used (npm packages)
+
+cors,
+
+dotenv,
+
+express,
+
+jose-cjs,
+
+jsonwebtoken,
+
+mongodb,
+
+nodemon,
+
+stripe,
+
+@better-auth/mongo-adapter,
+
+@heroui/react,
+
+@heroui/styles,
+
+animate.css,
+
+better-auth,
+
+lucide,
+
+lucide-react,
+
+next,
+
+next-themes,
+
+react,
+
+react-dom,
+
+react-icons,
+
+react-toastify,
+
+@gravity-ui/icons,
+
+@tailwindcss/postcss,
+
+babel-plugin-react-compiler,
+
+eslint,
+
+eslint-config-next,
+
+tailwindcss.
