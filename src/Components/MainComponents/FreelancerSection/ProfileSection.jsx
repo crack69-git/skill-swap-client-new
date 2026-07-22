@@ -4,23 +4,28 @@ import React from "react";
 import heroImg from "@/assets/nullProfile.jpg";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { getFreelancerById } from "@/lib/actions/users";
 const ProfileSection = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  const user = session?.user;
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const id = session?.user?.id;
+  const user = await getFreelancerById(id, token);
   console.log("user", user);
   return (
     <div>
       <Card className="w-full items-stretch md:flex-row mt-5 border">
         <div className="relative h-[140px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
           <Image
-            src={user.image}
             alt="user profile image"
             width={120}
-            height={190}
+            height={120}
+            src={user.image ? user.image : heroImg}
             loading="lazy"
-            className="object-cover rounded-2xl"
+            className="rounded-2xl object-cover"
           />
         </div>
         <div className="flex flex-1 flex-col gap-3">

@@ -1,6 +1,9 @@
 import FreelancerBrowse from "@/Components/MainComponents/FreelancerSection/BrowseFreelancer";
-import { getFreelancer } from "@/lib/actions/users";
+import { getAllBrowseFreelancer } from "@/lib/actions/users";
+import { auth } from "@/lib/auth";
 import { Card, Input, Label, ListBox, Select } from "@heroui/react";
+import { headers } from "next/headers";
+
 import React from "react";
 
 import { RiFilter3Line } from "react-icons/ri";
@@ -12,9 +15,9 @@ const page = async ({ searchParams }) => {
   const params = await searchParams;
   const name = params.name || "";
   const skill = params.skill || "";
-  console.log("Search Params:", params);
-  const data = await getFreelancer(name, skill);
-  console.log("Freelancers:", data);
+
+  const data = await getAllBrowseFreelancer(name, skill);
+  console.log("All Browse Freelancers:", data);
 
   const selectOptions = (
     <>

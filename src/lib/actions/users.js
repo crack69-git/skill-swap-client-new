@@ -25,14 +25,14 @@ export const patchUserInfoById = async (id, updatedUser, token) => {
   return response.json();
 };
 
-export const getFreelancer = async (name = "", skill = "") => {
+export const getAllBrowseFreelancer = async (name = "", skill = "") => {
   const params = new URLSearchParams();
 
   if (name) params.append("name", name);
   if (skill) params.append("skill", skill);
-  console.log("Fetching freelancers with params:", params.toString());
+
   const res = await fetch(
-    `${process.env.BACKEND_URL}/api/user/freelancer/all?${params.toString()}`,
+    `${process.env.BACKEND_URL}/api/user/freelancer/get/all?${params.toString()}`,
     {
       method: "GET",
       cache: "no-store",
@@ -48,6 +48,21 @@ export const getAllFreelancer = async () => {
     {
       method: "GET",
       cache: "no-store",
+    },
+  );
+
+  return res.json();
+};
+
+export const getFreelancerById = async (id, token) => {
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/user/freelancer/${id}`,
+    {
+      method: "GET",
+      cache: "no-store",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
 
