@@ -9,7 +9,7 @@ const Herosection = () => {
     <div className="w-11/12 mx-auto py-10">
       <div className="flex items-center justify-between gap-10">
         <div>
-          <p className="text-6xl font-bold mb-5">
+          <p className="text-6xl font-bold mb-5 animate__animated animate__backInLeft animate__delay-0.5s">
             Get your tasks done by<br></br>
             <span className="text-blue-600"> skilled freelancers</span>
           </p>
@@ -22,7 +22,7 @@ const Herosection = () => {
             <Button
               variant="tertiary"
               size="large"
-              className="p-6 border border-gray-300 "
+              className="p-6 border border-gray-300 animate__animated animate__bounceIn animate__faster"
             >
               <Link
                 href="/dashboard/client/post-task"
@@ -33,7 +33,11 @@ const Herosection = () => {
                 Post a Task
               </Link>
             </Button>
-            <Button variant="primary" size="large" className="p-6">
+            <Button
+              variant="primary"
+              size="large"
+              className="p-6 animate__animated animate__bounceIn animate__faster"
+            >
               <Link href="/browse-tasks" className="flex items-center gap-2">
                 <Earth />
                 Browse Tasks

@@ -4,7 +4,7 @@ import NavbarSection from "@/Components/MainComponents/NavbarSection";
 import Providers from "@/Components/MainComponents/ThemeProvider";
 import FooterSection from "@/Components/MainComponents/FooterSecction";
 import { Bounce, ToastContainer } from "react-toastify";
-
+import "animate.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
