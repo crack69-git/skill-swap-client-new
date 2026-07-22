@@ -34,7 +34,7 @@ const page = async () => {
         }
       >
         <DashboardStat user={user} />
-        <ProfileSection user={user} />
+        <ProfileSection />
       </Suspense>
     </div>
   );
