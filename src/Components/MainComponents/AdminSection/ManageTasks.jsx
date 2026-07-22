@@ -9,41 +9,6 @@ import { Bounce, toast } from "react-toastify";
 const ManageTasks = ({ task }) => {
   const router = useRouter();
 
-  const handleAcceptRequest = async (taskId, currentState) => {
-    const newState = currentState === "pending" ? "accepted" : "pending";
-
-    const { data: token, error } = await authClient.token();
-
-    const res = await patchTaskById(taskId, { state: newState }, token.token);
-
-    if (res.matchedCount > 0) {
-      toast.success(`Task state updated to ${newState}`, {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-
-      router.refresh();
-    } else {
-      toast.error("Failed to update task state", {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    }
-  };
   const handleDeleteRequest = async (taskId) => {
     const { data: token, error } = await authClient.token();
     const res = await deleteTaskById(taskId, token.token);
@@ -84,46 +49,6 @@ const ManageTasks = ({ task }) => {
       <Table.Cell>${task.budget}</Table.Cell>
       <Table.Cell>
         <div className="flex flex-col items-center justify-center gap-2">
-          {task.state === "pending" ? (
-            <Modal disabled>
-              <Button variant="secondary" disabled>
-                Accept Request
-              </Button>
-              <Modal.Backdrop>
-                <Modal.Container>
-                  <Modal.Dialog className="sm:max-w-[360px]">
-                    <Modal.CloseTrigger />
-                    <Modal.Header>
-                      <Modal.Icon className="bg-default text-foreground"></Modal.Icon>
-                      <Modal.Heading>Accept Task</Modal.Heading>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <p>
-                        Are you sure you want to accept this task request? This
-                        action cannot be undone.
-                      </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        size="sm"
-                        variant="primary"
-                        disabled={task.state === "accepted"}
-                        onClick={() =>
-                          handleAcceptRequest(task._id, task.state)
-                        }
-                      >
-                        Accept Request
-                      </Button>
-                    </Modal.Footer>
-                  </Modal.Dialog>
-                </Modal.Container>
-              </Modal.Backdrop>
-            </Modal>
-          ) : (
-            <p className="text-green-500 w-fit px-4 rounded-4xl py-3 ">
-              Accepted
-            </p>
-          )}
           <Modal>
             <Button variant="danger">Delete Task</Button>
             <Modal.Backdrop>
