@@ -26,14 +26,17 @@ const DashboardStat = async ({ user }) => {
     (task) => task?.status === "in-progress",
   );
 
-  const totalProposals = await getTaskProposals();
+  const totalProposals = await getTaskProposals(token.token);
   const pendingProposals = totalProposals.filter(
     (proposal) => proposal?.status === "pending",
   );
   const inProgressProposals = totalProposals.filter(
     (proposal) => proposal?.status === "in-progress",
   );
-  const totalEarnings = await getFreelancerPaymentByEmail(user?.email);
+  const totalEarnings = await getFreelancerPaymentByEmail(
+    user?.email,
+    token.token,
+  );
   const totalEarning = totalEarnings.reduce(
     (accumulator, currentValue) => accumulator + currentValue.amount_received,
     0,

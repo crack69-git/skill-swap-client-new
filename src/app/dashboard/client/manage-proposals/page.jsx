@@ -14,7 +14,6 @@ const page = async () => {
 
   const id = session?.user?.id;
   const data = await getProposalByClientId(id, token);
-  console.log("data", data);
 
   return (
     <div className="w-11/12 mx-auto my-5 min-h-screen">

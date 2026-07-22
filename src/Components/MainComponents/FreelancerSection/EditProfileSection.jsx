@@ -19,6 +19,7 @@ import { FaSave, FaUndo } from "react-icons/fa";
 import { Bounce, toast } from "react-toastify";
 import { patchUserInfoById } from "@/lib/actions/users";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 const EditProfileSection = ({ user }) => {
   const router = useRouter();
   const [skills, setSkills] = useState([]);
@@ -34,8 +35,10 @@ const EditProfileSection = ({ user }) => {
       bio: rawData.bio,
       skills: skills,
     };
+
+    const { data: token, error } = await authClient.token();
     const id = user.id;
-    const res = await patchUserInfoById(id, updatedUser);
+    const res = await patchUserInfoById(id, updatedUser, token.token);
     console.log("Response from patchUserInfoById:", res);
 
     if (res.acknowledged) {

@@ -1,6 +1,6 @@
 "use server";
 
-export const postTaskPayment = async (paymentData) => {
+export const postTaskPayment = async (paymentData, token) => {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/task/postTaskPayment`,
@@ -8,6 +8,7 @@ export const postTaskPayment = async (paymentData) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(paymentData),
       },
@@ -20,12 +21,15 @@ export const postTaskPayment = async (paymentData) => {
   }
 };
 
-export const getFreelancerPaymentByEmail = async (email) => {
+export const getFreelancerPaymentByEmail = async (email, token) => {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/task/getFreelancerPaymentByEmail/${email}`,
       {
         method: "GET",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       },
     );
     const result = await response.json();

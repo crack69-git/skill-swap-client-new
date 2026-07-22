@@ -1,6 +1,7 @@
 import BrowseTask from "@/Components/MainComponents/AllSection/BrowseTask";
 import PaginationComponent from "@/Components/MainComponents/Pagination/PaginationComponent";
 import { browseOpenTasks } from "@/lib/actions/tasks";
+import { auth } from "@/lib/auth";
 import {
   Button,
   Card,
@@ -10,6 +11,7 @@ import {
   ListBox,
   Select,
 } from "@heroui/react";
+import { headers } from "next/headers";
 import React from "react";
 import { BiTaskX } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
@@ -19,16 +21,19 @@ const page = async ({ searchParams }) => {
   //   const session = await auth.api.getSession({
   //     headers: await headers(),
   //   });
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   const name = params.name || "";
   const skill = params.skill || "";
-  console.log(name, skill);
+
   const currentPage = parseInt(params.page || "1", 10);
   const { tasks = [], totalItems = 0 } = await browseOpenTasks(
     name,
     skill,
     currentPage,
   );
-  console.log("tasks", tasks);
   const selectOptions = (
     <>
       <ListBox.Item id="frontend-development" textValue="Frontend Development">

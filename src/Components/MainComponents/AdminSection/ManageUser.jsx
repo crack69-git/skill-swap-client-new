@@ -1,10 +1,33 @@
 "use client";
+import { patchUserInfoById } from "@/lib/actions/users";
+import { authClient } from "@/lib/auth-client";
 import { Button, Modal, Table } from "@heroui/react";
 import { Rocket } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 
 const ManageUser = ({ user }) => {
+  const router = useRouter();
   const currentStatus = user?.userStatus || "unblocked";
+
+  const handleUserStateChange = async (userId, status) => {
+    const { data: token, error } = await authClient.token();
+
+    const newStatus = status === "unblocked" ? "blocked" : "unblocked";
+    const res = await patchUserInfoById(
+      userId,
+      { userStatus: newStatus },
+      token.token,
+    );
+
+    if (res.acknowledged) {
+      toast.success(`User has been ${newStatus}`);
+      router.refresh();
+    } else {
+      toast.error("Failed to update user status");
+    }
+  };
 
   return (
     <Table.Row>
@@ -38,7 +61,7 @@ const ManageUser = ({ user }) => {
                     </p>
                   </Modal.Body>
                   <Modal.Footer>
-                    {/* <Button
+                    <Button
                       size="sm"
                       onClick={() =>
                         handleUserStateChange(user._id, currentStatus)
@@ -47,7 +70,7 @@ const ManageUser = ({ user }) => {
                       {currentStatus === "unblocked"
                         ? "Block User"
                         : "Unblock User"}
-                    </Button> */}
+                    </Button>
                   </Modal.Footer>
                 </Modal.Dialog>
               </Modal.Container>

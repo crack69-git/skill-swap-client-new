@@ -10,13 +10,14 @@ export const getAllUsers = async (token) => {
   return response.json();
 };
 
-export const patchUserInfoById = async (id, updatedUser) => {
+export const patchUserInfoById = async (id, updatedUser, token) => {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/user/patchUserInfoById/${id}`,
     {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updatedUser),
     },

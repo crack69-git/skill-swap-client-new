@@ -28,7 +28,7 @@ const PostATask = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    // const token = await getToken(); // extract the token from the response
+
     const tasks = {
       TaskTitle: data.TaskTitle,
       category: data.category,
@@ -41,9 +41,9 @@ const PostATask = () => {
       state: "pending",
       description: data.description,
     };
-    const { data: value, error } = await authClient.token();
-    console.log("Token in PostATask component:", value);
-    const res = await postATask(tasks, value);
+    const { data: token, error } = await authClient.token();
+
+    const res = await postATask(tasks, token);
 
     if (res) {
       toast.success("Task created successfully!", {

@@ -35,13 +35,14 @@ export const getAllTasks = async (token) => {
   return response.json();
 };
 
-export const patchTaskById = async (id, updatedData) => {
+export const patchTaskById = async (id, updatedData, token) => {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/task/patch/${id}`,
     {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updatedData),
     },
@@ -49,11 +50,14 @@ export const patchTaskById = async (id, updatedData) => {
   return response.json();
 };
 
-export const ddeleteTaskById = async (id) => {
+export const deleteTaskById = async (id, token) => {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/task/delete/${id}`,
     {
       method: "DELETE",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return response.json();
@@ -69,7 +73,7 @@ export const browseOpenTasks = async (
   if (skill) params.append("skill", skill);
   params.append("page", currentPage);
   params.append("limit", 9);
-  console.log("params", params.toString());
+
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/task/browseOpenTasks?${params.toString()}`,
     {

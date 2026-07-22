@@ -3,16 +3,16 @@ import Image from "next/image";
 import React from "react";
 import heroImg from "@/assets/nullProfile.jpg";
 const ProfileSection = ({ user }) => {
-  console.log("user", user);
   return (
     <div>
       <Card className="w-full items-stretch md:flex-row mt-5 border">
         <div className="relative h-[140px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
           <Image
             alt="user profile image"
-            fill
-            className="pointer-events-none absolute inset-0 h-full w-full scale-125 object-cover select-none"
+            width={120}
+            height={190}
             loading="lazy"
+            className="object-cover rounded-2xl"
             src={user.image || heroImg}
           />
         </div>

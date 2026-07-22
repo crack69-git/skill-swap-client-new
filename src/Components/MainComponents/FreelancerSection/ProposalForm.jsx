@@ -45,17 +45,14 @@ const ProposalForm = ({ data }) => {
       freelancerMail: session?.user?.email,
       status: "pending",
     };
-    console.log("proposalData", proposalData);
 
     const proposal = await getTaskProposals();
-    console.log("proposal", proposal);
 
     const exixts = proposal.find(
       (proposal) =>
         proposal.taskId === data._id &&
         proposal.freelancerMail === session?.user?.email,
     );
-    console.log("exixts", exixts);
 
     if (exixts) {
       toast.error("You have already submitted a proposal for this task.", {
@@ -72,7 +69,8 @@ const ProposalForm = ({ data }) => {
 
       return;
     } else {
-      const response = await postTaskProposal(proposalData);
+      const { data: token, error } = await authClient.token();
+      const response = await postTaskProposal(proposalData, token.token);
 
       if (response.acknowledged) {
         toast.success("Proposal submitted successfully!", {

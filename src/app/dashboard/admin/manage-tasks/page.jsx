@@ -32,12 +32,9 @@ const page = async () => {
                   ))
                 ) : (
                   <Table.Row>
-                    <Table.Cell>No tasks found</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
+                    <Table.Cell colSpan={6} className="text-center">
+                      No tasks found
+                    </Table.Cell>
                   </Table.Row>
                 )}
               </Table.Body>

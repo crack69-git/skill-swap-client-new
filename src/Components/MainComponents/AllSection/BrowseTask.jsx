@@ -3,7 +3,6 @@ import { Button, Separator } from "@heroui/react";
 import Link from "next/link";
 
 const BrowseTask = async ({ task }) => {
-  console.log("task", task);
   return (
     <div className="border bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg p-4">
       <p

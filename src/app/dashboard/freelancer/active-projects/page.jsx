@@ -8,8 +8,11 @@ const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
   const email = session?.user?.email;
-  const data = await getInPendingProposalByEmail(email);
+  const data = await getInPendingProposalByEmail(email, token);
 
   return (
     <div className="w-11/12 mx-auto my-5">

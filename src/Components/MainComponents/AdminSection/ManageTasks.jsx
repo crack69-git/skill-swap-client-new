@@ -1,5 +1,6 @@
 "use client";
-import { ddeleteTaskById, patchTaskById } from "@/lib/actions/tasks";
+import { deleteTaskById, patchTaskById } from "@/lib/actions/tasks";
+import { authClient } from "@/lib/auth-client";
 import { Button, Modal, Table } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -7,10 +8,14 @@ import { Bounce, toast } from "react-toastify";
 
 const ManageTasks = ({ task }) => {
   const router = useRouter();
+
   const handleAcceptRequest = async (taskId, currentState) => {
     const newState = currentState === "pending" ? "accepted" : "pending";
-    const res = await patchTaskById(taskId, { state: newState });
-    console.log(res);
+
+    const { data: token, error } = await authClient.token();
+
+    const res = await patchTaskById(taskId, { state: newState }, token.token);
+
     if (res.matchedCount > 0) {
       toast.success(`Task state updated to ${newState}`, {
         position: "top-center",
@@ -40,7 +45,8 @@ const ManageTasks = ({ task }) => {
     }
   };
   const handleDeleteRequest = async (taskId) => {
-    const res = await ddeleteTaskById(taskId);
+    const { data: token, error } = await authClient.token();
+    const res = await deleteTaskById(taskId, token.token);
     console.log(res);
     if (res.acknowledged) {
       toast.success("Task deleted successfully", {

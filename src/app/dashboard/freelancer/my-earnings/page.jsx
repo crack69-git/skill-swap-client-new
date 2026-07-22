@@ -10,8 +10,10 @@ const page = async () => {
     headers: await headers(),
   });
   const email = session?.user?.email;
-  const data = await getFreelancerPaymentByEmail(email);
-  console.log(data);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const data = await getFreelancerPaymentByEmail(email, token);
 
   return (
     <div className="w-11/12 mx-auto my-5 min-h-screen">
@@ -27,9 +29,17 @@ const page = async () => {
               <Table.Column>Completion Date</Table.Column>
             </Table.Header>
             <Table.Body>
-              {data.map((payment) => (
-                <FreelancerEarning key={payment._id} payment={payment} />
-              ))}
+              {data?.length > 0 ? (
+                data?.map((payment) => (
+                  <FreelancerEarning key={payment._id} payment={payment} />
+                ))
+              ) : (
+                <Table.Row>
+                  <Table.Cell colSpan={4} className="text-center">
+                    No earnings found.
+                  </Table.Cell>
+                </Table.Row>
+              )}
             </Table.Body>
           </Table.Content>
         </Table.ScrollContainer>

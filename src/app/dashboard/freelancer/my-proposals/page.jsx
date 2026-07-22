@@ -10,9 +10,11 @@ const page = async () => {
     headers: await headers(),
   });
   const email = session?.user?.email;
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const res = await getTaskProposalsByEmail(email, token);
 
-  const res = await getTaskProposalsByEmail(email);
-  console.log(res);
   return (
     <div className="w-11/12 mx-auto my-5 min-h-screen">
       <h1 className="text-3xl font-bold mb-5">My Proposals</h1>
@@ -27,9 +29,17 @@ const page = async () => {
               <Table.Column>Proposal Sent</Table.Column>
             </Table.Header>
             <Table.Body>
-              {res.map((proposal) => (
-                <MyProposalTable key={proposal._id} proposal={proposal} />
-              ))}
+              {res?.length > 0 ? (
+                res?.map((proposal) => (
+                  <MyProposalTable key={proposal._id} proposal={proposal} />
+                ))
+              ) : (
+                <Table.Row>
+                  <Table.Cell colSpan={5} className="text-center">
+                    No proposals found.
+                  </Table.Cell>
+                </Table.Row>
+              )}
             </Table.Body>
           </Table.Content>
         </Table.ScrollContainer>

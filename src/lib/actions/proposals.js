@@ -1,6 +1,6 @@
 "use server";
 
-export const postTaskProposal = async (proposalData) => {
+export const postTaskProposal = async (proposalData, token) => {
   try {
     console.log("proposalData", proposalData);
     const response = await fetch(
@@ -9,6 +9,7 @@ export const postTaskProposal = async (proposalData) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(proposalData),
       },
@@ -21,12 +22,15 @@ export const postTaskProposal = async (proposalData) => {
   }
 };
 
-export const getTaskProposals = async () => {
+export const getTaskProposals = async (token) => {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/task/getTaskProposals`,
       {
         method: "GET",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       },
     );
     const result = await response.json();
@@ -37,12 +41,15 @@ export const getTaskProposals = async () => {
   }
 };
 
-export const getTaskProposalsByEmail = async (email) => {
+export const getTaskProposalsByEmail = async (email, token) => {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/task/getTaskProposalsByEmail/${email}`,
       {
         method: "GET",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       },
     );
     const result = await response.json();
@@ -93,12 +100,15 @@ export const patchTaskProposalById = async (proposalId, updatedData, token) => {
   }
 };
 
-export const getInPendingProposalByEmail = async (email) => {
+export const getInPendingProposalByEmail = async (email, token) => {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/task/getInPendingProposalByEmail/${email}`,
       {
         method: "GET",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       },
     );
     const result = await response.json();

@@ -9,6 +9,8 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { postTaskPayment } from "@/lib/actions/payments";
 import { patchTaskProposalById } from "@/lib/actions/proposals";
 import { patchTaskById } from "@/lib/actions/tasks";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 // import { getToken } from "@/lib/actions/tokenGet";
 
 export default async function Success({ searchParams }) {
@@ -43,19 +45,28 @@ export default async function Success({ searchParams }) {
       paymentDate: new Date(),
       deadline: metadata.deadline,
     };
-    console.log(paymentNow);
-    const paymentResponse = await postTaskPayment(paymentNow);
 
-    console.log("Payment response:", paymentResponse);
+    const { token } = await auth.api.getToken({
+      headers: await headers(),
+    });
+    const paymentResponse = await postTaskPayment(paymentNow, token);
 
     if (paymentResponse.success) {
-      const res1 = await patchTaskProposalById(metadata.proposalId, {
-        status: "in-progress",
-      });
+      const res1 = await patchTaskProposalById(
+        metadata.proposalId,
+        {
+          status: "in-progress",
+        },
+        token,
+      );
 
-      const res2 = await patchTaskById(metadata.taskId, {
-        status: "in-progress",
-      });
+      const res2 = await patchTaskById(
+        metadata.taskId,
+        {
+          status: "in-progress",
+        },
+        token,
+      );
     }
 
     return (
