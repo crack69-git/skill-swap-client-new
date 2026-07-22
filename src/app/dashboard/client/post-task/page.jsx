@@ -9,7 +9,7 @@ const PostATaskPage = async () => {
     headers: await headers(),
   });
   if (session?.user?.role !== "client") {
-    redirect("/unauthorize");
+    redirect("/unauthorized");
   }
   if (session?.user?.userStatus === "blocked") {
     redirect("/access-blocked");

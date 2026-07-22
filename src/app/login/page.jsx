@@ -9,7 +9,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 const Page = () => {

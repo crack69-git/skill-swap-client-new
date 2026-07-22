@@ -4,12 +4,22 @@ import { getAllTasks } from "@/lib/actions/tasks";
 import ManageTasks from "@/Components/MainComponents/AdminSection/ManageTasks";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 const page = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (session?.user?.role !== "admin") {
+    redirect("/unauthorized");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
   const { token } = await auth.api.getToken({
     headers: await headers(),
   });
   const tasks = await getAllTasks(token);
-  console.log(tasks);
+
   return (
     <div className="w-11/12 mx-auto my-5">
       <h2 className="text-3xl font-bold">Manage Tasks</h2>

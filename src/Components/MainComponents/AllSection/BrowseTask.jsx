@@ -24,7 +24,7 @@ const BrowseTask = async ({ task }) => {
       <div className="flex justify-between items-center mt-2">
         <p>Deadline: {task.deadline}</p>
         <div className={`flex gap-2 `}>
-          <Link href={`/dashboard/freelancer/browse-tasks/${task._id}`}>
+          <Link href={`/browse-tasks/${task._id}`}>
             <Button variant="primary" size="md" className="mt-2">
               View Details
             </Button>

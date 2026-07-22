@@ -12,7 +12,7 @@ const page = async () => {
   });
   const user = session?.user;
   if (session?.user?.role !== "freelancer") {
-    redirect("/unauthorize");
+    redirect("/unauthorized");
   }
   if (session?.user?.userStatus === "blocked") {
     redirect("/access-blocked");

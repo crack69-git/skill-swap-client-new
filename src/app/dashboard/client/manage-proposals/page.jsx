@@ -4,6 +4,7 @@ import { Table } from "@heroui/react";
 import { headers } from "next/headers";
 import React from "react";
 import ManageProposals from "@/Components/MainComponents/ClientSection/ManageProposals.jsx";
+import { redirect } from "next/navigation";
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -14,7 +15,12 @@ const page = async () => {
 
   const id = session?.user?.id;
   const data = await getProposalByClientId(id, token);
-
+  if (session?.user?.role !== "client") {
+    redirect("/unauthorized");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
   return (
     <div className="w-11/12 mx-auto my-5 min-h-screen">
       <h1 className="text-3xl font-bold mb-5">Manage Proposals</h1>

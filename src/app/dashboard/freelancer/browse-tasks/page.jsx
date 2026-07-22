@@ -12,15 +12,22 @@ import {
   Select,
 } from "@heroui/react";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 import { BiTaskX } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
 import { RiFilter3Line } from "react-icons/ri";
 const page = async ({ searchParams }) => {
   const params = await searchParams;
-  //   const session = await auth.api.getSession({
-  //     headers: await headers(),
-  //   });
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (session?.user?.role !== "freelancer") {
+    redirect("/unauthorized");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
   const { token } = await auth.api.getToken({
     headers: await headers(),
   });

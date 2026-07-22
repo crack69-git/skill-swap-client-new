@@ -12,7 +12,7 @@ const ClientHomepage = async () => {
   });
   const user = session?.user;
   if (session?.user?.role !== "client") {
-    redirect("/unauthorize");
+    redirect("/unauthorized");
   }
   if (session?.user?.userStatus === "blocked") {
     redirect("/access-blocked");

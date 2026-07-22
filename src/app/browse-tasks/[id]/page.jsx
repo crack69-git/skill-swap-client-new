@@ -3,7 +3,6 @@ import { getSingleTaskById } from "@/lib/actions/tasks";
 import { auth } from "@/lib/auth";
 import { Separator } from "@heroui/react";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import React from "react";
 import { IoTimer } from "react-icons/io5";
 import { LuTimerOff } from "react-icons/lu";
@@ -13,20 +12,15 @@ const page = async ({ params }) => {
   const { id } = await params;
 
   const data = await getSingleTaskById(id);
+  console.log("data", data);
 
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  if (session?.user?.role !== "freelancer") {
-    redirect("/unauthorized");
-  }
-  if (session?.user?.userStatus === "blocked") {
-    redirect("/access-blocked");
-  }
   const role = session?.user?.role;
 
   return (
-    <div className="w-11/12 max-md:grid-cols-1 mx-auto my-5 grid grid-cols-3 gap-4">
+    <div className="w-11/12 max-md:grid-cols-1 mx-auto my-5 grid grid-cols-3 gap-4 ">
       <div className="col-span-2  rounded-lg p-5 shadow-lg">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-semibold">{data.TaskTitle}</h2>
@@ -54,7 +48,11 @@ const page = async ({ params }) => {
         <Separator className="my-4" />
         <p className=" text-gray-500">Posted By: {data.clientName}</p>
       </div>
-      <ProposalForm data={data} />
+      {role === "freelancer" && (
+        <div className="col-span-1  rounded-lg p-5 shadow-lg">
+          <ProposalForm taskId={id} />
+        </div>
+      )}
     </div>
   );
 };

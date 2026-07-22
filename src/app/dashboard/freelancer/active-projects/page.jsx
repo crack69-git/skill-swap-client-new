@@ -2,12 +2,19 @@ import FreelancerActiveProposals from "@/Components/MainComponents/FreelancerSec
 import { getInPendingProposalByEmail } from "@/lib/actions/proposals";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const page = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  if (session?.user?.role !== "freelancer") {
+    redirect("/unauthorized");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
   const { token } = await auth.api.getToken({
     headers: await headers(),
   });
